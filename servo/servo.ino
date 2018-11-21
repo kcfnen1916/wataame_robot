@@ -31,8 +31,11 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 // want these to be as small/large as possible without hitting the hard stop
 // for max range. You'll have to tweak them as necessary to match the servos you
 // have!
-#define SERVOMIN  196 // this is the 'minimum' pulse length count (out of 4096)
-#define SERVOMAX  409 // this is the 'maximum' pulse length count (out of 4096)
+//#define SERVOMIN  196 // this is the 'minimum' pulse length count (out of 4096)
+//#define SERVOMAX  409 // this is the 'maximum' pulse length count (out of 4096)
+
+#define SERVOMIN 320
+#define SERVOMAX 370
 
 // our servo # counter
 uint8_t servonum = 0;
@@ -44,7 +47,6 @@ void setup() {
   pwm.begin();
   
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
-
   delay(10);
 }
 
@@ -67,17 +69,5 @@ void setServoPulse(uint8_t n, double pulse) {
 void loop() {
   // Drive each servo one at a time
   Serial.println(servonum);
-  for (uint16_t pulselen = SERVOMIN; pulselen < SERVOMAX; pulselen++) {
-    pwm.setPWM(1, 0, pulselen);
-  }
-
-  delay(5000);
-  for (uint16_t pulselen = SERVOMAX; pulselen > SERVOMIN; pulselen--) {
-    pwm.setPWM(1, 0, pulselen);
-  }
-
-  delay(5000);
-
-//  servonum ++;
-//  if (servonum > 7) servonum = 0;
+  pwm.setPWM(0, 0, 400);
 }
