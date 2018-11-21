@@ -1,5 +1,4 @@
 # wataame_robot
-====
 
 わたあめロボット「WataaMech」のArduino側とprocessing側のソースコード
 
