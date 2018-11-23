@@ -47,23 +47,20 @@ float get_dist(){
   return distance;
 }
 
-void base_move(float dest){
-  float dist = get_dist();
+void base_move(char in){
 //  Serial.print(dist);
 //  Serial.print("\n");
   int ds_tim = millis();
-  if (dist > dest){
+  if (in == 'i'){
     while (true) {
-      dist = get_dist();
       if (millis() - ds_tim  > 300){
         base_motor.rot_motor(0);
         break;
       }
       base_motor.rot_motor(-20);
     }
-  }else{
+  }else if (in == 'j'){
     while (true) {
-      dist = get_dist();
       if (millis() - ds_tim  > 500){
         base_motor.rot_motor(0);
         break;
@@ -116,12 +113,12 @@ void control(){
         Serial.print("Lift down\n");
         ls_pul = lift_servo.get_pos() - 2;
       }else if (input == 'i'){
-        Serial.print("Base up\n");
-        base_move(get_dist() + 25);
-      }else if (input == 'j'){
-        Serial.print("Base down\n");
-        base_move(get_dist() - 25);
-      }
+      Serial.print("Base up\n");
+      base_move('i');
+    }else if (input == 'j'){
+      Serial.print("Base down\n");
+      base_move('j');
+    }
     }else{
       if (pick_flag == 0){
         ls_pul = lift_servo.get_init(); // lift_servo
@@ -153,7 +150,6 @@ void loop() {
   input = Serial.read();
   Serial.print(get_dist());
   Serial.write('z');
-//  Serial.print(get_dist());
 
   if (get_dist() < 40){
         base_motor.rot_motor(0);
@@ -196,10 +192,10 @@ void loop() {
       lift_servo.rot_servo(lift_servo.get_pos() - 2);
     }else if (input == 'i'){
       Serial.print("Base up\n");
-      base_move(get_dist() + 25);
+      base_move('i');
     }else if (input == 'j'){
       Serial.print("Base down\n");
-      base_move(get_dist() - 25);
+      base_move('j');
     }
   } else {
     
