@@ -19,4 +19,3 @@ void Motor::rot_motor(int duty){
       analogWrite(m_in2,duty);
     }
 }
-

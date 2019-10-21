@@ -12,7 +12,7 @@ int echo = 8; // 入力ピン
 
 int pick_flag = 0;
 
-Servo lift_servo = Servo(0,440,320,330);
+Servo lift_servo = Servo(0,440,320,338);
 Servo grip_servo = Servo(2,250,196,205);
 Motor grip_motor = Motor(0,5,6);
 Motor base_motor = Motor(1,10,11);
@@ -78,7 +78,7 @@ void base_init(){
 }
 
 void control(){
-  int ls_pul = 330;
+  int ls_pul = 338;
   int gs_pul = 205;
   pick_flag = 0;
   while(true){
@@ -92,7 +92,7 @@ void control(){
       }else if(input == 'u'){
         grip_motor.rot_motor(0);
         base_motor.rot_motor(0);
-        lift_servo.rot_servo(360);
+        lift_servo.rot_servo(400);
         grip_servo.rot_servo(210);
         Serial.print("Successful completion\n");
         break;
